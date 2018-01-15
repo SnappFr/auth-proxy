@@ -1,6 +1,10 @@
-## Why ?
+# Snapp-Auth-proxy
 
 This module is used as an internal front end package that allows us to authenticate to our global authentication micro service.
+
+## Should I use it ? 
+
+For now, snapp-auth-proxy is highly dependent to our closed-source authentication micro service. We may consider open sourcing it in the future.
 
 ## Install
 
@@ -16,9 +20,7 @@ import { Config } from 'snapp-auth-proxy';
 Config.url = 'https://authproxyurl.com/'
 ```
 
-
-
-Once you have done that, you will be able to call the following classes and methods
+Once you've done that, you will be able to call the following classes and methods
 
 
 #### Define the authenticator
@@ -37,7 +39,7 @@ await user.authenticate('your@email.com', 'yourpassword');
 // returns true/false
 ```
 
-#### Check if user is logged in 
+#### Check if a user is logged in 
 
 ```javascript
 await user.isAuthenticated();
