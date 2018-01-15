@@ -4,7 +4,7 @@ export class Permission {
     this.endpoints = arrayOfPermissions;
   }
 
-  listOf(endpointName) {
+  of(endpointName) {
     return this.endpoints
       .find(endpoint => endpoint.name === endpointName)
       .permissions;
@@ -16,7 +16,7 @@ export class Permission {
   }
 
   isAuthorizedTo(action) {
-    return this.listOf(this.workspaceEndpoint.name).find(permission => permission === action);
+    return this.of(this.workspaceEndpoint.name).find(permission => permission === action);
   }
 
 }

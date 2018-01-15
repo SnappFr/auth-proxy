@@ -1,6 +1,6 @@
 {
-  "name": "permission-handler",
-  "version": "0.1.0",
+  "name": "snapp-auth-proxy",
+  "version": "1.0.0",
   "description": "Handling service based roles and permissions on SPA frontend",
   "main": "index.js",
   "scripts": {

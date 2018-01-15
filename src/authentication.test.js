@@ -1,8 +1,8 @@
 import assert from 'assert';
 import { Authentication } from './authentication';
-import { AuthProxyConfig } from './config';
+import { Config } from './config';
 
-AuthProxyConfig.url = 'http://localhost:3000';
+Config.url = 'http://localhost:3000';
 
 describe('Authentication', () => {
   describe('authenticate', () => {
@@ -18,6 +18,14 @@ describe('Authentication', () => {
       assert(authenticated === true);
     });
   });
+
+  describe('permissions', () => {
+    xit('should return the permission object', async () => {
+      const authManager = new Authentication();
+      const authenticated = await authManager.authenticate('correct@email.fr', 'correctpassword');
+      assert(authManager.permissions);
+    });
+  })
 
   describe('isAuthenticated', () => {
     xit('should return true if a user is authenticated', async () => {

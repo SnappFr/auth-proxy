@@ -1,4 +1,5 @@
 import { Config } from './config';
+import { Permission } from './permission';
 import 'isomorphic-fetch';
 
 export class Authentication {
@@ -9,7 +10,11 @@ export class Authentication {
       headers: { 'Content-type': 'application/json' }
     });
 
-    this.setAuthData(response.headers);
+    if (response.status === 200) {
+      const body = await response.json();
+      this.setAuthData(response.headers);
+      this.setPermissions(body);
+    }
     return response.status === 200;
   }
   
@@ -31,6 +36,10 @@ export class Authentication {
     localStorage.removeItem('token');
     localStorage.removeItem('uid');
     localStorage.removeItem('client');
+  }
+
+  setPermissions(jsonPermission) {
+    this.permissions = new Permission(jsonPermission.endpoints);
   }
 
   setAuthData(headers) {

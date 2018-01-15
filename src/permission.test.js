@@ -14,7 +14,7 @@ describe('Permission', () => {
   describe('list', () => {
     it('should list permissions of an endpoint', () => {
       assert(
-        JSON.stringify(handler.listOf('reward')) ===
+        JSON.stringify(handler.of('reward')) ===
         JSON.stringify(['admin.all', 'view.all', 'edit.all'])
       )
     });
