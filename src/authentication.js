@@ -38,6 +38,16 @@ export class Authentication {
     localStorage.removeItem('client');
   }
 
+  getHeaders() {
+    return {
+      uid: localStorage.getItem('uid'),
+      client: localStorage.getItem('client'),
+      'access-token': localStorage.getItem('token'),
+      'token-type': 'Bearer',
+      'x-api-endpoint': 'reward',
+    };
+  }
+
   setPermissions(jsonPermission) {
     this.permissions = new Permission(jsonPermission.endpoints);
   }
