@@ -10,26 +10,21 @@ export class Authentication {
       headers: { 'Content-type': 'application/json' }
     });
 
-    if (response.status === 200) {
-      const body = await response.json();
-      this.setAuthData(response.headers);
-      this.setPermissions(body);
-    }
-    return response.status === 200;
+    return this.setPermissions(response);
   }
   
   async isAuthenticated() {
     const response = await fetch(`${Config.getUrl()}/is-authenticated`, {
       method: 'POST',
       headers: {
-        'access-token': localStorage.getItem('token'),
+        'access-token': localStorage.getItem('AuthProxy.token'),
         'token-type': 'Bearer',
-        uid: localStorage.getItem('uid'),
-        client: localStorage.getItem('client'),
+        uid: localStorage.getItem('AuthProxy.uid'),
+        client: localStorage.getItem('AuthProxy.client'),
       }
     });
 
-    return response.status === 200;
+    return this.setPermissions(response);
   }
 
   logout() {
@@ -40,21 +35,27 @@ export class Authentication {
 
   getHeaders(endpoint) {
     return Object.assign({
-      uid: localStorage.getItem('uid'),
-      client: localStorage.getItem('client'),
-      'access-token': localStorage.getItem('token'),
+      uid: localStorage.getItem('AuthProxy.uid'),
+      client: localStorage.getItem('AuthProxy.client'),
+      'access-token': localStorage.getItem('AuthProxy.token'),
       'token-type': 'Bearer'
     }, (endpoint ? { 'x-api-endpoint': endpoint } : {}));
   }
 
-  setPermissions(jsonPermission) {
-    this.permissions = new Permission(jsonPermission.endpoints);
+  async setPermissions(response) {
+    if (response.status === 200) {
+      const body = await response.json();
+      this.setAuthData(response.headers);
+      this.setPermissions(body);
+      this.permissions = new Permission(body.endpoints);
+    }
+    return response.status === 200;
   }
 
   setAuthData(headers) {
-    localStorage.setItem('token', headers.get('access-token'));
-    localStorage.setItem('uid', headers.get('uid'));
-    localStorage.setItem('client', headers.get('client'));
+    localStorage.setItem('AuthProxy.token', headers.get('access-token'));
+    localStorage.setItem('AuthProxy.uid', headers.get('uid'));
+    localStorage.setItem('AuthProxy.client', headers.get('client'));
   }
 
 }
