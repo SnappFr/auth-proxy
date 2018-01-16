@@ -73,7 +73,7 @@ For example, viewing a post in you blog app might be authorized to people who ca
 
 ```javascript
 // You can also check authorization again an array of permissions
-user.permissions.on('microServiceName').isAuthorizedTo([
+user.permissions.on('microServiceName').isAuthorizedToDoAnyOf([
   'manage.posts',
   'manage.everything',
   'view.post',
