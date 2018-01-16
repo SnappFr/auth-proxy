@@ -49,6 +49,20 @@ describe('Authentication', () => {
       authManager.logout();
       assert(!(await authManager.isAuthenticated()));
     });
-  })
+  });
+
+  describe('getHeaders', () => {
+    it('should return correct http headers', async () => {
+      const authManager = new Authentication();
+      assert.deepEqual(
+        authManager.getHeaders('endpoint'),
+        { uid: null, client: null, 'access-token': null, 'token-type': 'Bearer', 'x-api-endpoint': 'endpoint' }
+      );
+      assert.deepEqual(
+        authManager.getHeaders('lol'),
+        { uid: null, client: null, 'access-token': null, 'token-type': 'Bearer', 'x-api-endpoint': 'lol' }
+      );
+    });
+  });
 });
 

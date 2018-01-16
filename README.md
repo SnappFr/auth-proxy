@@ -66,3 +66,9 @@ user.permissions.on('microServiceName').isAuthorizedTo('edit.post');
 // returns true/false
 ```
 
+#### Get HTTP headers for current user
+
+```javascript
+user.getHeaders('microServiceName');
+```
+
