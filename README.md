@@ -59,11 +59,25 @@ user.permissions.listOf('microServiceName')
 // returns an array of actions authorized, for instance: ['edit.post', 'create.post']
 ```
 
-#### Check if user is authorized to do a specific action
+#### Check if user is authorized to do specific actions
 
 ```javascript
 user.permissions.on('microServiceName').isAuthorizedTo('edit.post');
 // returns true/false
+```
+
+#### Check if user can do any of an array of actions
+
+This method is useful to provide access to different types of users. 
+For example, viewing a post in you blog app might be authorized to people who can `manage.posts`, `manage.everything`, or just `view.post`
+
+```javascript
+// You can also check authorization again an array of permissions
+user.permissions.on('microServiceName').isAuthorizedTo([
+  'manage.posts',
+  'manage.everything',
+  'view.post',
+]);
 ```
 
 #### Get HTTP headers for current user
