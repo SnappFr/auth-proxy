@@ -86,3 +86,14 @@ user.permissions.on('microServiceName').isAuthorizedToDoAnyOf([
 user.getHeaders('microServiceName');
 ```
 
+## Contributing
+
+`npm install`
+
+#### Run test
+
+`npm test`
+
+#### Build for production
+
+`npm run build`
