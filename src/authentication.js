@@ -28,9 +28,9 @@ export class Authentication {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('uid');
-    localStorage.removeItem('client');
+    localStorage.removeItem("AuthProxy.token");
+    localStorage.removeItem("AuthProxy.uid");
+    localStorage.removeItem("AuthProxy.client");
   }
 
   getHeaders(endpoint) {
